@@ -9,6 +9,7 @@ public class LevelManager : MonoBehaviour
     string AppLockPassword = "658392642";
     string TempLockScreenPassword = "";
     string TempAppLockPassword = "";
+    public static LevelManager instance;
     // Start is called before the first frame update
     void Start()
     {
@@ -46,6 +47,8 @@ public class LevelManager : MonoBehaviour
         if(TempLockScreenPassword.Length == LockScreenPassword.Length){
             if(ValidatePassword(TempLockScreenPassword, LockScreenPassword)){
                 LoadMainScreen();
+            }else{
+                SceneManager.LoadScene("LockScreen");
             }
         }
     }
@@ -58,8 +61,17 @@ public class LevelManager : MonoBehaviour
         if(TempAppLockPassword.Length == AppLockPassword.Length){
             if(ValidatePassword(TempAppLockPassword, AppLockPassword)){
                 Debug.Log("Open The App");
+                Debug.Log("Opening " + PlayerPrefs.GetString("appName"));
+            }else{
+                SceneManager.LoadScene("MainScreen");
             }
         }
+    }
+
+    public void SelectApp(string AppName){
+        PlayerPrefs.SetString("appName", AppName);
+        PlayerPrefs.Save();
+        SceneManager.LoadScene("AppLockScreen");
     }
 
     bool ValidatePassword(string userinput, string correct){
