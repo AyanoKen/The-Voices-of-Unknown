@@ -6,7 +6,9 @@ using UnityEngine.SceneManagement;
 public class LevelManager : MonoBehaviour
 {
     string LockScreenPassword = "213668";
+    string AppLockPassword = "658392642";
     string TempLockScreenPassword = "";
+    string TempAppLockPassword = "";
     // Start is called before the first frame update
     void Start()
     {
@@ -41,19 +43,38 @@ public class LevelManager : MonoBehaviour
 
         Debug.Log("Current Password: " + TempLockScreenPassword);
 
-        if(TempLockScreenPassword.Length == 6){
-            ValidatePassword(TempLockScreenPassword);
+        if(TempLockScreenPassword.Length == LockScreenPassword.Length){
+            if(ValidatePassword(TempLockScreenPassword, LockScreenPassword)){
+                LoadMainScreen();
+            }
         }
     }
 
-    void ValidatePassword(string key){
-        if(key == LockScreenPassword){
+    public void UnlockAppPassword(string key){
+        TempAppLockPassword += key;
+
+        Debug.Log("Current Password: " + TempAppLockPassword);
+
+        if(TempAppLockPassword.Length == AppLockPassword.Length){
+            if(ValidatePassword(TempAppLockPassword, AppLockPassword)){
+                Debug.Log("Open The App");
+            }
+        }
+    }
+
+    bool ValidatePassword(string userinput, string correct){
+        if(userinput == correct){
             Debug.Log("Correct Password!");
             TempLockScreenPassword = "";
-            LoadMainScreen();
+            TempAppLockPassword = "";
+
+            return true; 
         }else{
             Debug.Log("Wrong Password!");
             TempLockScreenPassword = "";
+            TempAppLockPassword = "";
+
+            return false;
             //TODO: Add a screen shake or other animation indicating that the password failed
         }
     }
