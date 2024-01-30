@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
+    string LockScreenPassword = "213668";
+    string TempLockScreenPassword = "";
     // Start is called before the first frame update
     void Start()
     {
@@ -28,5 +30,26 @@ public class LevelManager : MonoBehaviour
 
     public void LoadLockScreen(){
         SceneManager.LoadScene("LockScreen");
+    }
+
+    public void UnlockPassword(string key){
+        TempLockScreenPassword += key;
+
+        Debug.Log("Current Password: " + TempLockScreenPassword);
+
+        if(TempLockScreenPassword.Length == 6){
+            ValidatePassword(TempLockScreenPassword);
+        }
+    }
+
+    void ValidatePassword(string key){
+        if(key == LockScreenPassword){
+            Debug.Log("Correct Password!");
+            TempLockScreenPassword = "";
+            LoadLockScreen();
+        }else{
+            Debug.Log("Wrong Password!");
+            TempLockScreenPassword = "";
+        }
     }
 }
