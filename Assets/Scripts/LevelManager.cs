@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
@@ -18,5 +19,14 @@ public class LevelManager : MonoBehaviour
 
     public void UnlockPhone(){
         Debug.Log("Attempted to Unlock Phone");
+        LoadPasswordScreen();
+    }
+
+    void LoadPasswordScreen(){
+        SceneManager.LoadScene("PasswordScreen");
+    }
+
+    public void LoadLockScreen(){
+        SceneManager.LoadScene("LockScreen");
     }
 }
