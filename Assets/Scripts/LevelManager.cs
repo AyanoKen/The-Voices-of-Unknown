@@ -24,8 +24,12 @@ public class LevelManager : MonoBehaviour
         LoadPasswordScreen();
     }
 
-    void LoadPasswordScreen(){
+    private void LoadPasswordScreen(){
         SceneManager.LoadScene("PasswordScreen");
+    }
+
+    private void LoadMainScreen(){
+        SceneManager.LoadScene("MainScreen");
     }
 
     public void LoadLockScreen(){
@@ -46,7 +50,7 @@ public class LevelManager : MonoBehaviour
         if(key == LockScreenPassword){
             Debug.Log("Correct Password!");
             TempLockScreenPassword = "";
-            LoadLockScreen();
+            LoadMainScreen();
         }else{
             Debug.Log("Wrong Password!");
             TempLockScreenPassword = "";
