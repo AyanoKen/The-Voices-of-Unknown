@@ -50,6 +50,7 @@ public class LevelManager : MonoBehaviour
         }else{
             Debug.Log("Wrong Password!");
             TempLockScreenPassword = "";
+            //TODO: Add a screen shake or other animation indicating that the password failed
         }
     }
 }
