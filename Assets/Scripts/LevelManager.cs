@@ -62,6 +62,7 @@ public class LevelManager : MonoBehaviour
             if(ValidatePassword(TempAppLockPassword, AppLockPassword)){
                 Debug.Log("Open The App");
                 Debug.Log("Opening " + PlayerPrefs.GetString("appName"));
+                //TODO: Depending on what app name is saved, we open that app scene
             }else{
                 SceneManager.LoadScene("MainScreen");
             }
